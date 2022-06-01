@@ -17,9 +17,7 @@
                     if (settings.needToAddDay)
                     {
                         //Calculates de difference to go to the first day of the week and then add the weeks
-                        int diff = firstDayOfWeek - today;
-                        settings.currentDate=settings.currentDate.AddDays(diff);
-                        settings.currentDate=settings.currentDate.AddDays(settings.weeks * 7);
+                        WeeksAdder.AddWeeks(settings, firstDayOfWeek, today);
                         ApplyDaily(settings);
                     }
                     else
@@ -31,8 +29,7 @@
                 {
                     if (settings.needToAddDay)
                     {
-                        int diff = (int)settings.days.GetKey(todayIndex + 1) - (int)settings.days.GetKey(todayIndex);
-                        settings.currentDate = settings.currentDate.AddDays(diff);
+                        DaysAdder.NextDay(settings, todayIndex);
                         ApplyDaily(settings);
                     }
                     else
@@ -45,22 +42,11 @@
             {
                 if (today > settings.lastDay)
                 {
-                    int diff = firstDayOfWeek - today;
-                    settings.currentDate = settings.currentDate.AddDays(diff);
-                    settings.currentDate = settings.currentDate.AddDays(settings.weeks * 7);
+                    WeeksAdder.AddWeeks(settings, firstDayOfWeek, today);
                     ApplyDaily(settings);
                 } else
                 {
-                    int diff = 0;
-                    for(int i = 0; i <settings.days.Count; i++)
-                    {
-                        if (today < (int)settings.days.GetKey(i))
-                        {
-                            diff = (int)settings.days.GetKey(i) - today;
-                            break;
-                        }
-                    }
-                    settings.currentDate = settings.currentDate.AddDays(diff);
+                    DaysAdder.NextAvaibleDay(settings, today);
                     ApplyDaily(settings);
                 }
             }

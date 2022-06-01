@@ -18,12 +18,8 @@
                     if (settings.needToAddDay)
                     {
                         //Calculates de difference to go to the first day of the week and then add the weeks
-                        int diff = firstDayOfWeek - today;
-                        settings.currentDate = settings.currentDate.AddDays(diff);
-                        settings.currentDate = settings.currentDate.AddDays(settings.weeks * 7);
-                        string nextExecution = settings.currentDate.ToString("dd/MM/yyyy") + " " + settings.startingHour.ToString("HH:mm");
-                        settings.calculatedDate = DateTime.ParseExact(nextExecution, "dd/MM/yyyy HH:mm", null);
-                        settings.nextExecutionTime = nextExecution;
+                        WeeksAdder.AddWeeks(settings, firstDayOfWeek, today);
+                        WriteNextExecution(settings);
                     }
                     else
                     {
@@ -34,11 +30,8 @@
                 {
                     if (settings.needToAddDay)
                     {
-                        int diff = (int)settings.days.GetKey(todayIndex + 1) - (int)settings.days.GetKey(todayIndex);
-                        settings.currentDate = settings.currentDate.AddDays(diff);
-                        string nextExecution = settings.currentDate.ToString("dd/MM/yyyy") + " " + settings.startingHour.ToString("HH:mm");
-                        settings.calculatedDate = DateTime.ParseExact(nextExecution, "dd/MM/yyyy HH:mm", null);
-                        settings.nextExecutionTime = nextExecution;
+                        DaysAdder.NextDay(settings, todayIndex);
+                        WriteNextExecution(settings);
                     }
                     else
                     {
@@ -50,28 +43,13 @@
             {
                 if (today > settings.lastDay)
                 {
-                    int diff = firstDayOfWeek - today;
-                    settings.currentDate = settings.currentDate.AddDays(diff);
-                    settings.currentDate = settings.currentDate.AddDays(settings.weeks * 7);
-                    string nextExecution = settings.currentDate.ToString("dd/MM/yyyy") + " " + settings.startingHour.ToString("HH:mm");
-                    settings.calculatedDate = DateTime.ParseExact(nextExecution, "dd/MM/yyyy HH:mm", null);
-                    settings.nextExecutionTime = nextExecution;
+                    WeeksAdder.AddWeeks(settings, firstDayOfWeek, today);
+                    WriteNextExecution(settings);
                 }
                 else
                 {
-                    int diff = 0;
-                    for (int i = 0; i < settings.days.Count; i++)
-                    {
-                        if (today < (int)settings.days.GetKey(i))
-                        {
-                            diff = (int)settings.days.GetKey(i) - today;
-                            break;
-                        }
-                    }
-                    settings.currentDate = settings.currentDate.AddDays(diff);
-                    string nextExecution = settings.currentDate.ToString("dd/MM/yyyy") + " " + settings.startingHour.ToString("HH:mm");
-                    settings.calculatedDate = DateTime.ParseExact(nextExecution, "dd/MM/yyyy HH:mm", null);
-                    settings.nextExecutionTime = nextExecution;
+                    DaysAdder.NextAvaibleDay(settings, today);
+                    WriteNextExecution(settings);
                 }
             }
         }
@@ -101,6 +79,13 @@
                 }
             }
             string nextExecution = settings.currentDate.ToString("dd/MM/yyyy") + " " + calculated.ToString("HH:mm");
+            settings.calculatedDate = DateTime.ParseExact(nextExecution, "dd/MM/yyyy HH:mm", null);
+            settings.nextExecutionTime = nextExecution;
+        }
+
+        public static void WriteNextExecution(Settings settings)
+        {
+            string nextExecution = settings.currentDate.ToString("dd/MM/yyyy") + " " + settings.startingHour.ToString("HH:mm");
             settings.calculatedDate = DateTime.ParseExact(nextExecution, "dd/MM/yyyy HH:mm", null);
             settings.nextExecutionTime = nextExecution;
         }
