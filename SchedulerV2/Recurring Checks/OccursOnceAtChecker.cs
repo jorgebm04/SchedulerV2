@@ -4,7 +4,7 @@
     {
         public static bool CheckOccursOnceAt(DateTime currentDate, DateTime hour)
         {
-            if (TimeSpan.Compare(currentDate.TimeOfDay, hour.TimeOfDay) > 0)
+            if (TimeSpan.Compare(currentDate.TimeOfDay, hour.TimeOfDay) < 0)
             {
                 return false;
             }

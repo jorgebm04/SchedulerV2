@@ -2,10 +2,10 @@
 {
     public class TypeEnum
     {
-        public enum Types : int
+        public enum Types
         {
-            Once = 0,
-            Recurring = 1
+            Once,
+            Recurring
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class FreqEnum
     {
-        public enum frequency
+        public enum Frequency
         {
             Hours,
             Minutes,

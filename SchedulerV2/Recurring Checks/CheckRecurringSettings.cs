@@ -6,10 +6,10 @@
         {
             switch (settings.occurs)
             {
-                case (int)OccursEnum.occurs.Daily:
+                case (int)OccursEnum.Occurs.Daily:
                     CheckDailySettings.CheckRecurringDailySettings(settings);
                     break;
-                case (int)OccursEnum.occurs.Weekly:
+                case (int)OccursEnum.Occurs.Weekly:
                     CheckWeeklySettings.CheckRecurrentWeeklySettings(settings);
                     break;
                 default:

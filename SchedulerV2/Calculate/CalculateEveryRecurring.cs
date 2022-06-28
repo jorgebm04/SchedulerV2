@@ -23,13 +23,13 @@
             {
                 switch (settings.freq)
                 {
-                    case (int)FreqEnum.frequency.Hours:
+                    case (int)FreqEnum.Frequency.Hours:
                         calculated = calculated.AddHours(settings.occursEveryFreq);
                         break;
-                    case (int)FreqEnum.frequency.Minutes:
+                    case (int)FreqEnum.Frequency.Minutes:
                         calculated = calculated.AddMinutes(settings.occursEveryFreq);
                         break;
-                    case (int)FreqEnum.frequency.Seconds:
+                    case (int)FreqEnum.Frequency.Seconds:
                         calculated = calculated.AddSeconds(settings.occursEveryFreq);
                         break;
                 }

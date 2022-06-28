@@ -2,7 +2,7 @@
 {
     public class OccursEnum
     {
-        public enum occurs 
+        public enum Occurs 
         {
             Daily,
             Weekly
